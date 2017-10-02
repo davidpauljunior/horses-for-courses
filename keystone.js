@@ -65,7 +65,7 @@ keystone.set('mongo', process.env.MONGODB_URI || 'mongodb://localhost/horses-for
 
 if (keystone.get('env') == 'production'){
 	console.info('env = ' + keystone.get('env'));
-    keystone.set('cloudinary config', process.env.CLOUDINARY_URL);
+    // keystone.set('cloudinary config', process.env.CLOUDINARY_URL); // Not yet needed
     keystone.set('cookie secret', process.env.COOKIE_SECRET);
 }
 
