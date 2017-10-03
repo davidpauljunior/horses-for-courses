@@ -32,6 +32,8 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
+	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/horses-for-courses',
+	'cookie secret': process.env.COOKIE_SECRET || 'demo',
 });
 
 // Load your project's Models
@@ -60,15 +62,5 @@ keystone.set('nav', {
 	users: 'users',
 });
 
-// Configure the environment
-keystone.set('mongo', process.env.MONGODB_URI || 'mongodb://localhost/horses-for-courses'); // TODO: check this fallback
-
-if (keystone.get('env') == 'production'){
-    // keystone.set('cloudinary config', process.env.CLOUDINARY_URL); // Not yet needed
-    keystone.set('cookie secret', process.env.COOKIE_SECRET);
-}
-
-
 // Start Keystone to connect to your database and initialise the web server
-
 keystone.start();
