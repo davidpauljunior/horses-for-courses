@@ -32,7 +32,7 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/horses-for-courses',
+	'mongo': process.env.MONGODB_URI || 'mongodb://localhost/horses-for-courses',
 	'cookie secret': process.env.COOKIE_SECRET || 'demo',
 });
 
