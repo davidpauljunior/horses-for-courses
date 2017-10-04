@@ -56,10 +56,10 @@ keystone.set('routes', require('./routes'));
 keystone.Email.defaults.templateExt = 'hbs';
 keystone.Email.defaults.templateEngine = require('handlebars');
 
-
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
 	users: 'users',
+	races: 'races',
 });
 
 // Start Keystone to connect to your database and initialise the web server
