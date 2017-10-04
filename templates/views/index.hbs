@@ -19,3 +19,25 @@
 		</p>
 	</div>
 </div>
+
+<div class="container">
+	{{#if races.results.length}}
+		{{#if races.totalPages > 1}}
+			<div class="lead text-muted">
+				Showing <strong>{{races.first}}</strong> 
+				to <strong>{{races.last}}</strong>
+				of <strong>{{races.total}}</strong>
+				races
+			</div>
+		{{else}}
+			<div class="lead text-muted">Showing {{utils.plural(races.results.length, '* race')}}</div>
+			<div class="blog">
+				{{#each races.results}}
+					<div class="test">
+						{{this.author.name.full}}
+					</div>
+				{{/each}}
+			</div>
+		{{/if}}
+	{{/if}}
+</div>
