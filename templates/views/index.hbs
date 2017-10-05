@@ -21,8 +21,11 @@
 </div>
 
 <div class="container">
+	{{#if races.length}}
+		hello bobby
+	{{/if}}
 	{{#if races.results.length}}
-		{{#if races.totalPages > 1}}
+		{{#if races.results.totalPages}}
 			<div class="lead text-muted">
 				Showing <strong>{{races.first}}</strong> 
 				to <strong>{{races.last}}</strong>
@@ -30,7 +33,7 @@
 				races
 			</div>
 		{{else}}
-			<div class="lead text-muted">Showing {{utils.plural(races.results.length, '* race')}}</div>
+			{{!-- <div class="lead text-muted">Showing {{utils.plural(races.results.length, '* race')}}</div> --}}
 			<div class="blog">
 				{{#each races.results}}
 					<div class="test">

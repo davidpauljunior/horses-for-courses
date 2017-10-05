@@ -1,5 +1,5 @@
 var keystone = require('keystone');
-var race = keystone.list('Race');
+var Race = keystone.list('Race');
 
 exports = module.exports = function (req, res) {
 
@@ -11,37 +11,17 @@ exports = module.exports = function (req, res) {
 	locals.section = 'home';
 	locals.races = [];
 
-	// Load the races
-	view.on('init', function (next) {
-		var q = Race.paginate({
-			page: req.query.page || 1,
-			perPage: 10,
-			maxPages: 10,
-		})
-		.where('state', 'published')
-		.sort('-publishedDate');
+	view.on('init', function(next) {
+		var q = Race.model.find()
+			.where('state', 'published')
+			.populate('author')
+			.sort('-publishedAt')
+			.limit(5);
 
-		q.exec(function (err, results) {
+		q.exec(function(err, results) {
+			// do something with posts
 			locals.races = results;
-			next(err);
 		});
-		// var q = Post.paginate({
-		// 		page: req.query.page || 1,
-		// 			perPage: 10,
-		// 			maxPages: 10,
-		// 	})
-		// 	.where('state', 'published')
-		// 	.sort('-publishedDate')
-		// 	.populate('author categories');
-
-		// if (locals.category) {
-		// 	q.where('categories').in([locals.category]);
-		// }
-
-		// q.exec(function (err, results) {
-		// 	locals.posts = results;
-		// 	next(err);
-		// });
 	});
 
 	// Render the view
