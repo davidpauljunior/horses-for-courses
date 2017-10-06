@@ -21,6 +21,7 @@ exports = module.exports = function (req, res) {
 		q.exec(function(err, results) {
 			// do something with posts
 			locals.races = results;
+			next(err);
 		});
 	});
 
