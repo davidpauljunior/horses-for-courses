@@ -1,5 +1,5 @@
 {{!< default}}
-<div class="container">
+{{!-- <div class="container">
 	<div class="jumbotron"><img src="/images/logo.svg" width="160">
 		<h1>Welcome</h1>
 		<p>This is your new <a href='http://keystonejs.com' target='_blank'>KeystoneJS</a> website.</p>
@@ -18,11 +18,39 @@
 			<a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a> on twitter for updates.
 		</p>
 	</div>
-</div>
+</div> --}}
 
 <div class="container">
+	<p><a class="btn btn-sm btn-primary" href='/keystone'>Keystone</a></p>
 	{{#if races.length}}
-		hello bobby
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Date</th>
+					<th>Course</th>
+					<th>Horse</th>
+					<th>Odds</th>
+					<th>Result</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each races}}
+					<tr>
+						{{! TODO: Maths helper to add 1 (math @index "+" 1) }}
+						<th scope="row">{{@index}}</th>
+						<td>{{this.date}}</td>
+						<td>{{this.course}}</td>
+						<td>{{this.horse}}</td>
+						<td>{{this.odds}}</td>
+						{{! TODO: Add 'success' class if it won.  May need to put that into model}}
+						<td>{{this.result}}</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	{{else}}
+		chug chug chug
 	{{/if}}
 	{{#if races.results.length}}
 		{{#if races.results.totalPages}}

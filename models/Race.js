@@ -8,11 +8,12 @@ var Race = new keystone.List('Race');
 Race.add({
     date: { type: Types.Datetime, required: true, initial: true },
     course: {type: Types.Text, required: true, initial: true },
+    horse: {type: Types.Text, required: true, initial: true },
     odds: { type: Types.Text, required: true, initial: true},
-	position: { type: Types.Select, options: [
-        { value: 'won', label: 'Won' },
-        { value: 'placed', label: 'Placed' },
-        { value: 'did not place', label: 'Did not place' }
+	result: { type: Types.Select, options: [
+        { value: 'Won', label: 'Won' },
+        { value: 'Placed', label: 'Placed' },
+        { value: 'Did not place', label: 'Did not place' }
     ], required: true, initial: true }
 });
 

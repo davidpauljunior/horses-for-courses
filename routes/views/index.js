@@ -12,13 +12,11 @@ exports = module.exports = function (req, res) {
 	locals.races = [];
 
 	view.on('init', function(next) {
-		var q = Race.model.find()
-			.where('state', 'published')
-			.populate('author')
-			.sort('-publishedAt')
-			.limit(5);
+		// TODO: Pagination
+		var q = Race.model.find();
 
 		q.exec(function(err, results) {
+			console.log(results); // empty array
 			// do something with posts
 			locals.races = results;
 			next(err);
