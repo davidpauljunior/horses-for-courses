@@ -22,7 +22,7 @@ exports = module.exports = function (req, res) {
 		// TODO later: Pagination
 		var q = Race.model.find();
 
-		q.exec(function(err, results) { 
+		q.exec(function(err, results) {
 			var updatedResults = [];
 
 			for (var i = 0; i < results.length; i++) {
@@ -30,12 +30,12 @@ exports = module.exports = function (req, res) {
 				var odds = decimalOdds(result.odds);
 				result.decimalOdds = odds;
 
-				updatedResults.push(result);
-				console.log(result.decimalOdds);
+				// updatedResults.push(result);
+				console.log(typeof result.horse);
 			}
 
 			// THIS DOES NOT CONTAIN THE DECIMAL ODDS
-			console.log(updatedResults);
+			// console.log(updatedResults);
 
 			// do something with posts
 			locals.races = results; // TODO: Will change to updatedResults
