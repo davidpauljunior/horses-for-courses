@@ -24,8 +24,11 @@ Race.add({
             { value: 'Placed', label: 'Placed' },
             { value: 'Did not place', label: 'Did not place' }
         ], required: true, initial: true
-    }
+    },
 });
+
+// Race.schema.set('won', false);
+// Race.schema.set('placed', false);
 
 /**
  * Uses Schema to modify data before 
@@ -49,22 +52,20 @@ Race.schema.pre('save', function(next) {
       this.odds = this.decimalOdds(this.odds)
     }
     next()
-})
+});
 
 // Add into the model a state of 'won' that is a boolean
 // In hbs it will check {{#if this.won}} to apply success class to the row
 // Actually will be {{#if this.won}}{{else if this.placed}} so can do something with placed ones
 // TODO: This isn't working :(
-Race.schema.pre('save', function(next) {
-    if (this.isModified('result')) {
-      if (this.result === 'Won') {
-          this.won = true;
-      } else if (this.result === 'Placed') {
-          this.placed = true;
-      }
-    }
-    next()
-})
+// Race.schema.pre('save', function(next) {
+//     if (this.isModified('result')) {
+//         if (this.result === 'Won') {
+//             this.won = true;
+//         }
+//     }
+//     next()
+// });
 
 Race.track = true;
 Race.defaultSort = '-createdAt';
