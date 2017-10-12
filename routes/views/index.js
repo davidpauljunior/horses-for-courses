@@ -16,8 +16,15 @@ exports = module.exports = function (req, res) {
 		var q = Race.model.find();
 
 		q.exec(function(err, results) {
-			// do something with races
-			console.log(results);
+			for (var i = 0; i < results.length; i++) {
+				var result = results[i];
+				if (result.won) {
+					console.log('Won:', result.won);
+				} else if (result.placed) {
+					console.log('Placed', result.placed);
+				}
+			}
+			// do something with posts
 			locals.races = results; // TODO: Will change to updatedResults
 			next(err);
 		});

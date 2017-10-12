@@ -35,7 +35,7 @@
 			</thead>
 			<tbody>
 				{{#each races}}
-					<tr>
+					<tr {{#if this.won}}class="success"{{else if this.placed}}class="warning"{{/if}}>
 						{{! TODO: Maths helper to add 1 (math @index "+" 1) }}
 						<th scope="row">{{@index}}</th>
 						<td>{{this.date}}</td>

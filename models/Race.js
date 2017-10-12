@@ -27,9 +27,6 @@ Race.add({
     },
 });
 
-// Race.schema.set('won', false);
-// Race.schema.set('placed', false);
-
 /**
  * Uses Schema to modify data before 
  * saving it to the database.
@@ -54,18 +51,19 @@ Race.schema.pre('save', function(next) {
     next()
 });
 
-// Add into the model a state of 'won' that is a boolean
-// In hbs it will check {{#if this.won}} to apply success class to the row
-// Actually will be {{#if this.won}}{{else if this.placed}} so can do something with placed ones
-// TODO: This isn't working :(
-// Race.schema.pre('save', function(next) {
-//     if (this.isModified('result')) {
-//         if (this.result === 'Won') {
-//             this.won = true;
-//         }
-//     }
-//     next()
-// });
+/**
+ * This is to set properties without persisting
+ * them to the database.
+ * https://stackoverflow.com/questions/46696739/adding-a-new-property-to-mongo-after-save-in-keystone/46703599#46703599
+ * http://mongoosejs.com/docs/guide.html#virtuals
+ */
+Race.schema.virtual('won').get(function () {
+    return this.result === 'Won';
+});
+
+Race.schema.virtual('placed').get(function () {
+    return this.result === 'Placed';
+});
 
 Race.track = true;
 Race.defaultSort = '-createdAt';
