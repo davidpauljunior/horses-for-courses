@@ -16,6 +16,24 @@ exports = module.exports = function (req, res) {
 		var q = Race.model.find();
 
 		q.exec(function(err, results) {
+			var profit = 0;
+			var stake = 1; // Todo: configurable from input box
+
+			for (var i = 0; i < results.length; i++) {
+				var result = results[i];
+				// result.won comes from virtual in schema
+				if (result.won) {
+					var returns = (stake * result.odds) - stake;
+					profit = (profit + returns);
+					result.returns = `£${returns}`;
+				} else {
+					profit = (profit - stake);
+					result.returns = `-£${stake}`;
+				}
+			}
+
+			results.profit = profit;
+			results.stake = stake;
 			// do something with posts
 			locals.races = results;
 			next(err);

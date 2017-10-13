@@ -11,7 +11,7 @@ Race.add({
     course: {
         type: String, required: true, initial: true
     },
-    race: {
+    raceTime: {
         type: String, required: true, initial: true
     },
     horse: {
@@ -46,6 +46,7 @@ Race.schema.methods.decimalOdds = function(fraction) {
     return ((splitFields[0] / splitFields[1]) + 1).toFixed(2);
 }
 
+// NOTE: this will cause the odds to change to decimal, so when you go to 'edit' a race they'll be different to what entered initially.
 Race.schema.pre('save', function(next) {
     if (this.isModified('odds')) {
       this.odds = this.decimalOdds(this.odds)
@@ -75,5 +76,5 @@ Race.track = true;
 Race.defaultSort = 'date';
 // TODO: Table column widths
 // name, state|20%, author|20%, publishedDate|20%
-Race.defaultColumns = 'date, course, race, horse, odds, position';
+Race.defaultColumns = 'raceDate, course, raceTime, horse, odds, position';
 Race.register();
