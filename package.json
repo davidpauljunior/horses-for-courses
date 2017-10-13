@@ -13,7 +13,8 @@
     "lodash": "^4.13.1",
     "moment": "^2.10.6",
     "node-sass": "^3.3.2",
-    "node-sass-middleware": "^0.9.7"
+    "node-sass-middleware": "^0.9.7",
+    "onchange": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^2.12.0",
@@ -22,6 +23,9 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node keystone.js"
+    "start": "node keystone.js",
+    "build:css": "mkdir -p ./public/styles/site && node-sass --output-style compressed ./public/styles/site.scss > ./public/styles/site.css",
+    "watch:css": "onchange './public/styles/**/*.scss' -- npm run build:css",
+    "dev": "npm run build:css && npm run watch:css"
   }
 }

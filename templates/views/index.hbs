@@ -1,28 +1,8 @@
 {{!< default}}
-{{!-- <div class="container">
-	<div class="jumbotron"><img src="/images/logo.svg" width="160">
-		<h1>Welcome</h1>
-		<p>This is your new <a href='http://keystonejs.com' target='_blank'>KeystoneJS</a> website.</p>
-		<p>
-			It includes the latest versions of
-			<a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>
-			and <a href='http://www.jquery.com/' target='_blank'>jQuery</a>.
-		</p>
-		<p>Visit the <a href='http://keystonejs.com/guide' target='_blank'>Getting Started</a> guide to learn how to customise it.</p>
-		<hr>
-		<p>We have created a default Admin user for you with the email <strong>davidpauljunior@gmail.com</strong> and the password <strong>admin</strong>.</p>
-		<p><a href="/keystone/signin" style="margin-right: 10px" class="btn btn-lg btn-primary">Sign in</a> to use the Admin UI.</p>
-		<hr>
-		<p>
-			Remember to <a href='https://github.com/keystonejs/keystone' target='_blank'>Star KeystoneJS on GitHub</a> and
-			<a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a> on twitter for updates.
-		</p>
-	</div>
-</div> --}}
 
 <div class="container">
 	{{#if races.length}}
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-hover table-sm">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -36,7 +16,7 @@
 			</thead>
 			<tbody>
 				{{#each races}}
-					<tr {{#if this.won}}class="success"{{else if this.placed}}class="warning"{{/if}}>
+					<tr>
 						{{! TODO: Maths helper to add 1 (math @index "+" 1) }}
 						<th scope="row">{{increment @index}}</th>
 						<td>{{this.date}}</td>
@@ -45,7 +25,7 @@
 						<td>{{this.horse}}</td>
 						<td>{{this.odds}}</td>
 						{{! TODO: Add 'success' class if it won.  May need to put that into model}}
-						<td>{{this.result}}</td>
+						<td {{#if this.won}}class="table-success"{{else if this.placed}}class="table-warning"{{/if}}>{{this.result}}</td>
 					</tr>
 				{{/each}}
 			</tbody>
