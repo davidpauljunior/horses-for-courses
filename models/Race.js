@@ -1,24 +1,26 @@
 var keystone = require('keystone');
+var moment = require('moment');
 var Types = keystone.Field.Types;
 
 var Race = new keystone.List('Race');
 
-// format: 'D MMM YYYY hh:mm' this isn't working in datetime
-
 Race.add({
-    date: {
-        type: Types.Datetime, required: true, initial: true 
+    raceDate: {
+        type: Types.Date, required: true, format: 'DD/MM/YYYY', initial: true
     },
     course: {
-        type: Types.Text, required: true, initial: true 
+        type: String, required: true, initial: true
+    },
+    race: {
+        type: String, required: true, initial: true
     },
     horse: {
-        type: Types.Text, required: true, initial: true 
+        type: String, required: true, initial: true
     },
     odds: {
-        type: Types.Text, required: true, initial: true
+        type: String, required: true, initial: true
     },
-	result: { 
+	result: {
         type: Types.Select, options: [
             { value: 'Won', label: 'Won' },
             { value: 'Placed', label: 'Placed' },
@@ -65,7 +67,13 @@ Race.schema.virtual('placed').get(function () {
     return this.result === 'Placed';
 });
 
+Race.schema.virtual('date').get(function () {
+    return moment(this.raceDate).format('DD/MM/YYYY');
+});
+
 Race.track = true;
-Race.defaultSort = '-createdAt';
-Race.defaultColumns = 'date, course, race, odds, position, createdAt';
+Race.defaultSort = 'date';
+// TODO: Table column widths
+// name, state|20%, author|20%, publishedDate|20%
+Race.defaultColumns = 'date, course, race, horse, odds, position';
 Race.register();

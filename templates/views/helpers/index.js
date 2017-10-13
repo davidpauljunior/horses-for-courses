@@ -326,5 +326,9 @@ module.exports = function () {
 		return obj._[underscoreMethod].format();
 	};
 
+	_helpers.increment = function (value, options) {
+		return parseInt(value) + 1;
+	};
+
 	return _helpers;
 };

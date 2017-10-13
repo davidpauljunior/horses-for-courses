@@ -28,6 +28,7 @@
 					<th>#</th>
 					<th>Date</th>
 					<th>Course</th>
+					<th>Race</th>
 					<th>Horse</th>
 					<th>Odds</th>
 					<th>Result</th>
@@ -37,9 +38,10 @@
 				{{#each races}}
 					<tr {{#if this.won}}class="success"{{else if this.placed}}class="warning"{{/if}}>
 						{{! TODO: Maths helper to add 1 (math @index "+" 1) }}
-						<th scope="row">{{@index}}</th>
+						<th scope="row">{{increment @index}}</th>
 						<td>{{this.date}}</td>
 						<td>{{this.course}}</td>
+						<td>{{this.race}}</td>
 						<td>{{this.horse}}</td>
 						<td>{{this.odds}}</td>
 						{{! TODO: Add 'success' class if it won.  May need to put that into model}}
