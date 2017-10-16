@@ -25,14 +25,14 @@ exports = module.exports = function (req, res) {
 				if (result.won) {
 					var returns = (stake * result.odds) - stake;
 					profit = (profit + returns);
-					result.returns = `£${returns}`;
+					result.returns = `£${returns.toFixed(2)}`;
 				} else {
 					profit = (profit - stake);
-					result.returns = `-£${stake}`;
+					result.returns = `-£${stake.toFixed(2)}`;
 				}
 			}
 
-			results.profit = profit;
+			results.profit = profit.toFixed(2);
 			results.stake = stake;
 			// do something with posts
 			locals.races = results;
